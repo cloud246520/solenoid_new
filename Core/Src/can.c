@@ -83,6 +83,9 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     GPIO_InitStruct.Alternate = GPIO_AF4_CAN;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+    /* CAN interrupt Init */
+    HAL_NVIC_SetPriority(CEC_CAN_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CEC_CAN_IRQn);
   /* USER CODE BEGIN CAN_MspInit 1 */
 
   /* USER CODE END CAN_MspInit 1 */
@@ -106,6 +109,8 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     */
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8|GPIO_PIN_9);
 
+    /* CAN interrupt Deinit */
+    HAL_NVIC_DisableIRQ(CEC_CAN_IRQn);
   /* USER CODE BEGIN CAN_MspDeInit 1 */
 
   /* USER CODE END CAN_MspDeInit 1 */
@@ -113,6 +118,27 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 }
 
 /* USER CODE BEGIN 1 */
+// HAL_StatusTypeDef CAN_Send20261025(void)
+// {
+//   CAN_TxHeaderTypeDef txHeader = {0};
+//   uint8_t txData[8] = {2U, 0U, 2U, 6U, 1U, 0U, 2U, 5U};
+//   uint32_t txMailbox;
+//   HAL_StatusTypeDef status;
+
+//   txHeader.StdId = 0x123U;
+//   txHeader.IDE = CAN_ID_STD;
+//   txHeader.RTR = CAN_RTR_DATA;
+//   txHeader.DLC = sizeof(txData);
+//   txHeader.TransmitGlobalTime = DISABLE;
+
+//   status = HAL_CAN_AddTxMessage(&hcan, &txHeader, txData, &txMailbox);
+//   if (status == HAL_OK)
+//   {
+//     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
+//   }
+
+//   return status;
+// }
 
 /* USER CODE END 1 */
 

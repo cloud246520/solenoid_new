@@ -5,7 +5,7 @@
 #include <string.h>
 
 /*define---------------------------------------*/
-#define TARGET_ID 0x123 //给根据发送方控制帧自行更改
+#define TARGET_ID 0x423 //给根据发送方控制帧自行更改
 static uint8_t              canRxData[8];
 static CAN_RxHeaderTypeDef canRxHeader;
 CAN_DataTypeDef g_canReceivedData;

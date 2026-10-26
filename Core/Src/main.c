@@ -45,6 +45,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint32_t lastCanSend = 0;
 
 /* USER CODE END PV */
 
@@ -91,7 +92,7 @@ int main(void)
   MX_CAN_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  register_init();
+  //register_init();
   reciever_init(&hcan);
 
   /* USER CODE END 2 */
@@ -103,6 +104,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    // if (HAL_GetTick() - lastCanSend >= 1000U)
+    // {
+    //   lastCanSend = HAL_GetTick();
+    //   if (CAN_Send20261025() != HAL_OK)
+    //   {
+    //     Error_Handler();
+    //   }
+    // }
   }
   /* USER CODE END 3 */
 }
